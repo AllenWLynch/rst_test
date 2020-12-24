@@ -27,25 +27,29 @@ genes-of-interest, as well as regions-of-interest, you may use the more specific
 **lisa.FromGenes(self, species, cores = 1, assays = ['Direct','H3K27ac','DNase'], isd_method = 'chipseq')**
     Initialize the LISA test using public data.
 
-    * **param species:** {'hg38', 'mm10'}
-    * **param cores:** *int* number of cores to use. For optimal performance, allocate 1, 2, 5, or 10 cores. More cores is faster.
-    * **param assays:** *list* of {"Direct","H3K27ac","DNase"}, default is all tests
-    * **param isd_method:** {"chipseq", "motifs"} use ChIP-seq data or motifs to mark TF binding locations.
+    :params:
+    * **species:** {'hg38', 'mm10'}
+    * **cores:** *int* number of cores to use. For optimal performance, allocate 1, 2, 5, or 10 cores. More cores is faster.
+    * **assays:** *list* of {"Direct","H3K27ac","DNase"}, default is all tests
+    * **isd_method:** {"chipseq", "motifs"} use ChIP-seq data or motifs to mark TF binding locations.
     
-    * **return:** lisa object
+    :returns:
+    * **lisa object**
         
 
     **predict(self, query_list, background_list = [], background_strategy = 'regulatory', num_background_genes = 3000, seed = 2556)**
         Predict TF influence given a set of genes.
 
-        * **param query_list:** *list* genes-of-interest, in either Symbol of RefSeqID format. Must provide between 20 to 500 genes.
-        * **param background_list:** *list* user-specified list of background genes to compare with query_list. Must contain more genes than query list and entire list will be used. If provided, ```background_strategy``` must be set to "provided".
-        * **param background_strategy:** {"regulatory","random","provided"}, regulatory will sample background genes from a stratified sample of TADs and regulatory states, random will randomly sample from all non-query genes.
-        * **param num_background_genes:** *int* Number of genes to use as comparison to query genes. More background genes make test slower, but more stable.
-        * **param seed:** *int* Seed for gene selection and regression model initialization.
+        :params:
+        * **query_list:** *list* genes-of-interest, in either Symbol of RefSeqID format. Must provide between 20 to 500 genes.
+        * **background_list:** *list* user-specified list of background genes to compare with query_list. Must contain more genes than query list and entire list will be used. If provided, ```background_strategy``` must be set to "provided".
+        * **background_strategy:** {"regulatory","random","provided"}, regulatory will sample background genes from a stratified sample of TADs and regulatory states, random will randomly sample from all non-query genes.
+        * **num_background_genes:** *int* Number of genes to use as comparison to query genes. More background genes make test slower, but more stable.
+        * **seed:** *int* Seed for gene selection and regression model initialization.
 
-        * **return results:** Dictionary with each key representing a table column, sorted by "summary_p_value" field. The dictionary can be passed directly to a the pandas constructor: ``results_df = pd.DataFrame(results.todict())``.
-        * **return metadata:** Dictionary with test metadata. Includes query genes provided and background genes that were selected. This 
+        :returns:
+        * **results:** Dictionary with each key representing a table column, sorted by "summary_p_value" field. The dictionary can be passed directly to a the pandas constructor: ``results_df = pd.DataFrame(results.todict())``.
+        * **metadata:** Dictionary with test metadata. Includes query genes provided and background genes that were selected. This 
         metadata dict also contains information on the accessibility datasets that were selected to represent the chromatin landscape around you genes-of-interest, for example, the tissue and cell line from which the profiles were derived.
         
 
@@ -84,6 +88,7 @@ This interface outputs results in the same format as the ``FromGenes`` interface
 
     **predict(self, query_list, background_list = [], background_strategy = 'regulatory', num_background_genes = 3000, seed = 2556)**
         Predict TF influence given a set of genes.
+        
         :params:
         * **query_list:** *list* genes-of-interest, in either Symbol of RefSeqID format. Must provide between 20 to 500 genes.
         * **background_list:** *list* user-specified list of background genes to compare with query_list. Must contain more genes than query list and entire list will be used. If provided, ```background_strategy``` must be set to "provided".
