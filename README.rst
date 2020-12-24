@@ -86,17 +86,17 @@ This interface outputs results in the same format as the ``FromGenes`` interface
     * **lisa object**
         
 
-    **predict(self, query_list, background_list = [], background_strategy = 'regulatory', num_background_genes = 3000, seed = 2556)**
+    :predict(self, query_list, background_list = [], background_strategy = 'regulatory', num_background_genes = 3000, seed = 2556):
         Predict TF influence given a set of genes.
         
-        :params:
+        **params:**
         * **query_list:** *list* genes-of-interest, in either Symbol of RefSeqID format. Must provide between 20 to 500 genes.
         * **background_list:** *list* user-specified list of background genes to compare with query_list. Must contain more genes than query list and entire list will be used. If provided, ```background_strategy``` must be set to "provided".
         * **background_strategy:** {"regulatory","random","provided"}, regulatory will sample background genes from a stratified sample of TADs and regulatory states, random will randomly sample from all non-query genes.
         * **num_background_genes:** *int* Number of genes to use as comparison to query genes. More background genes make test slower, but more stable.
         * **seed:** *int* Seed for gene selection and regression model initialization.
 
-        :returns:
+        **returns:**
         * **results:** Dictionary with each key representing a table column, sorted by "summary_p_value" field. The dictionary can be passed directly to a the pandas constructor: ``results_df = pd.DataFrame(results.todict())``.
         * **metadata:** Dictionary with test metadata. Includes query genes provided and background genes that were selected.
         
