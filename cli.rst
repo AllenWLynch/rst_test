@@ -10,6 +10,7 @@ a gene are influenced by deleting elements associated with a TF (a process we ca
 
 Interfaces
 **********
+
 * `lisa.FromGenes`_
 * `lisa.FromRegions`_
 
@@ -22,12 +23,14 @@ usage: make_docs.py oneshot [-h] [--seed SEED] [--use_motifs]
                             {hg38,mm10} query_list
 
 positional arguments:
+
   {hg38,mm10}           Find TFs associated with human (hg38) or mouse (mm10)
                         genes
   query_list            user-supplied gene lists. One gene per line in either
                         symbol or refseqID format
 
 optional arguments:
+
   -h, --help            show this help message and exit
   --seed SEED           Random seed for gene selection. Allows for reproducing
                         exact results.
