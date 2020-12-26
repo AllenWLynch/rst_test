@@ -26,7 +26,9 @@ If you have multiple lists, this option will be slower than using "multi" due to
 
 *Example:*
 
-$ lisa oneshot hg38 ./genelist.txt -b 501 -c 5 --seed=2556 --save_metadata > results.tsv
+.. code-block:: bash
+
+    $ lisa oneshot hg38 ./genelist.txt -b 501 -c 5 --seed=2556 --save_metadata > results.tsv
 
 usage:
 	lisa oneshot [-h] [-o OUTPUT_PREFIX]
@@ -86,7 +88,8 @@ the test on up and down-regulated genes from multiple RNA-seq clusters.
 
 *Example:*
 
-$ lisa multi hg38 ./genelists/*.txt -b 501 -c 5 -o ./results/
+.. code-block:: bash
+    $ lisa multi hg38 ./genelists/*.txt -b 501 -c 5 -o ./results/
 
 usage:
 	lisa multi [-h] -o OUTPUT_PREFIX [-v VERBOSE]
@@ -139,10 +142,12 @@ associated score should be positive. Scores are often read-depth at those region
 
 *Example:*
 
-$ lisa regions -r ./regions.bed -q ./genelist.txt -b 501 --save_metadata > results.tsv
+.. code-block:: bash
+
+    $ lisa regions -r ./regions.bed -q ./genelist.txt -b 501 --save_metadata > results.tsv
 
 usage:
-	lisa regions [-h] [-r REGIONS] [-q--query_list Q__QUERY_LIST]
+	lisa regions [-h] -r REGIONS -q--query_list Q__QUERY_LIST
                             [-o OUTPUT_PREFIX]
                             [--background_strategy {regulatory,random,provided}]
                             [--background_list BACKGROUND_LIST | -b NUM_BACKGROUND_GENES]
