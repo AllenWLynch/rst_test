@@ -4,6 +4,7 @@ Lisa CLI
 ********
 
 Installing LISA using pip or conda adds the "lisa" command to your path. LISA's functionality is divided into three main subcommands:
+
 * `lisa oneshot`_: one genelist
 * `lisa multi`_: multiple genelists
 * `lisa regions`_: one genelist and a list of regions
@@ -15,10 +16,9 @@ See the `Python API <docs/python_api.rst>`_ for more in-depth description of tes
 
 
 lisa oneshot
-
 ************
 
-You have: 
+You have:
 
 * one genelist
 
@@ -29,7 +29,7 @@ If you have multiple lists, this option will be slower than using "multi" due to
 
 $ lisa oneshot hg38 ./genelist.txt -b 501 -c 5 --seed=2556 --save_metadata > results.tsv
 
-usage: make_docs.py oneshot [-h] [--seed SEED] [--use_motifs]
+usage: lisa oneshot [-h] [--seed SEED] [--use_motifs]
                             [--save_metadata] [-o OUTPUT_PREFIX]
                             [--background_strategy {regulatory,random,provided}]
                             [--background_list BACKGROUND_LIST | -b NUM_BACKGROUND_GENES]
@@ -87,7 +87,7 @@ the test on up and down-regulated genes from multiple RNA-seq clusters.
 $ lisa multi hg38 ./genelists/*.txt -b 501 -c 5 -o ./results/
 ``
 
-usage: make_docs.py multi [-h] [--seed SEED] [--use_motifs] [--save_metadata]
+usage: lisa multi [-h] [--seed SEED] [--use_motifs] [--save_metadata]
                           -o OUTPUT_PREFIX [-v VERBOSE]
                           [-b NUM_BACKGROUND_GENES] [--random_background] -c
                           CORES
@@ -138,7 +138,7 @@ associated score should be positive. Scores are often read-depth at those region
 $ lisa regions -r ./regions.bed -q ./genelist.txt -b 501 --save_metadata > results.tsv
 ``
 
-usage: make_docs.py regions [-h] [--seed SEED] [--use_motifs]
+usage: lisa regions [-h] [--seed SEED] [--use_motifs]
                             [--save_metadata] [-r REGIONS]
                             [-q--query_list Q__QUERY_LIST] [-o OUTPUT_PREFIX]
                             [--background_strategy {regulatory,random,provided}]
@@ -186,10 +186,9 @@ optional arguments:
 
 
 lisa oneshot
-
 ************
 
-You have: 
+You have:
 
 * one genelist
 
@@ -200,7 +199,7 @@ If you have multiple lists, this option will be slower than using "multi" due to
 
 $ lisa oneshot hg38 ./genelist.txt -b 501 -c 5 --seed=2556 --save_metadata > results.tsv
 
-usage: make_docs.py oneshot [-h] [--seed SEED] [--use_motifs]
+usage: lisa oneshot [-h] [--seed SEED] [--use_motifs]
                             [--save_metadata] [-o OUTPUT_PREFIX]
                             [--background_strategy {regulatory,random,provided}]
                             [--background_list BACKGROUND_LIST | -b NUM_BACKGROUND_GENES]
@@ -258,7 +257,7 @@ the test on up and down-regulated genes from multiple RNA-seq clusters.
 $ lisa multi hg38 ./genelists/*.txt -b 501 -c 5 -o ./results/
 ``
 
-usage: make_docs.py multi [-h] [--seed SEED] [--use_motifs] [--save_metadata]
+usage: lisa multi [-h] [--seed SEED] [--use_motifs] [--save_metadata]
                           -o OUTPUT_PREFIX [-v VERBOSE]
                           [-b NUM_BACKGROUND_GENES] [--random_background] -c
                           CORES
@@ -309,7 +308,7 @@ associated score should be positive. Scores are often read-depth at those region
 $ lisa regions -r ./regions.bed -q ./genelist.txt -b 501 --save_metadata > results.tsv
 ``
 
-usage: make_docs.py regions [-h] [--seed SEED] [--use_motifs]
+usage: lisa regions [-h] [--seed SEED] [--use_motifs]
                             [--save_metadata] [-r REGIONS]
                             [-q--query_list Q__QUERY_LIST] [-o OUTPUT_PREFIX]
                             [--background_strategy {regulatory,random,provided}]
@@ -357,10 +356,9 @@ optional arguments:
 
 
 lisa oneshot
-
 ************
 
-You have: 
+You have:
 
 * one genelist
 
@@ -371,7 +369,7 @@ If you have multiple lists, this option will be slower than using "multi" due to
 
 $ lisa oneshot hg38 ./genelist.txt -b 501 -c 5 --seed=2556 --save_metadata > results.tsv
 
-usage: make_docs.py oneshot [-h] [--seed SEED] [--use_motifs]
+usage: lisa oneshot [-h] [--seed SEED] [--use_motifs]
                             [--save_metadata] [-o OUTPUT_PREFIX]
                             [--background_strategy {regulatory,random,provided}]
                             [--background_list BACKGROUND_LIST | -b NUM_BACKGROUND_GENES]
@@ -429,7 +427,7 @@ the test on up and down-regulated genes from multiple RNA-seq clusters.
 $ lisa multi hg38 ./genelists/*.txt -b 501 -c 5 -o ./results/
 ``
 
-usage: make_docs.py multi [-h] [--seed SEED] [--use_motifs] [--save_metadata]
+usage: lisa multi [-h] [--seed SEED] [--use_motifs] [--save_metadata]
                           -o OUTPUT_PREFIX [-v VERBOSE]
                           [-b NUM_BACKGROUND_GENES] [--random_background] -c
                           CORES
@@ -480,7 +478,7 @@ associated score should be positive. Scores are often read-depth at those region
 $ lisa regions -r ./regions.bed -q ./genelist.txt -b 501 --save_metadata > results.tsv
 ``
 
-usage: make_docs.py regions [-h] [--seed SEED] [--use_motifs]
+usage: lisa regions [-h] [--seed SEED] [--use_motifs]
                             [--save_metadata] [-r REGIONS]
                             [-q--query_list Q__QUERY_LIST] [-o OUTPUT_PREFIX]
                             [--background_strategy {regulatory,random,provided}]
