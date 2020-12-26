@@ -93,6 +93,7 @@ This interface outputs results in the same format as the ``FromGenes`` interface
 *Example:*
 
 .. code:: python
+
     # Read genelist file
     >>> genes_file = open('./genelist.txt', 'r')
     >>> genes = [x.strip() for x in genes_file.readlines()]
