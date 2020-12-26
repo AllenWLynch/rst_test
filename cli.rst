@@ -36,13 +36,6 @@ positional arguments:
 
 optional arguments:
   -h, --help            show this help message and exit
-  --seed SEED           Random seed for gene selection. Allows for reproducing
-                        exact results. (default: 2556)
-  --use_motifs          Use motif hits instead of ChIP-seq peaks to represent
-                        TF binding (only recommended if TF-of-interest is not
-                        represented in ChIP-seq database). (default: chipseq)
-  --save_metadata       Save json-formatted metadata from processing each gene
-                        list. (default: False)
   -o OUTPUT_PREFIX, --output_prefix OUTPUT_PREFIX
                         Output file prefix. If left empty, will write results
                         to stdout. (default: None)
@@ -63,6 +56,13 @@ optional arguments:
   -v VERBOSE, --verbose VERBOSE
   -c CORES, --cores CORES
   -a {Direct,H3K27ac,DNase} [{Direct,H3K27ac,DNase} ...], --assays {Direct,H3K27ac,DNase} [{Direct,H3K27ac,DNase} ...]
+  --seed SEED           Random seed for gene selection. Allows for reproducing
+                        exact results. (default: 2556)
+  --use_motifs          Use motif hits instead of ChIP-seq peaks to represent
+                        TF binding (only recommended if TF-of-interest is not
+                        represented in ChIP-seq database). (default: chipseq)
+  --save_metadata       Save json-formatted metadata from processing each gene
+                        list. (default: False)
 
 
 lisa multi
@@ -87,13 +87,6 @@ positional arguments:
 
 optional arguments:
   -h, --help            show this help message and exit
-  --seed SEED           Random seed for gene selection. Allows for reproducing
-                        exact results. (default: 2556)
-  --use_motifs          Use motif hits instead of ChIP-seq peaks to represent
-                        TF binding (only recommended if TF-of-interest is not
-                        represented in ChIP-seq database). (default: chipseq)
-  --save_metadata       Save json-formatted metadata from processing each gene
-                        list. (default: False)
   -o OUTPUT_PREFIX, --output_prefix OUTPUT_PREFIX
                         Output file prefix. (default: None)
   -v VERBOSE, --verbose VERBOSE
@@ -105,6 +98,13 @@ optional arguments:
                         "regulatory" selection. (default: regulatory)
   -c CORES, --cores CORES
   -a {Direct,H3K27ac,DNase} [{Direct,H3K27ac,DNase} ...], --assays {Direct,H3K27ac,DNase} [{Direct,H3K27ac,DNase} ...]
+  --seed SEED           Random seed for gene selection. Allows for reproducing
+                        exact results. (default: 2556)
+  --use_motifs          Use motif hits instead of ChIP-seq peaks to represent
+                        TF binding (only recommended if TF-of-interest is not
+                        represented in ChIP-seq database). (default: chipseq)
+  --save_metadata       Save json-formatted metadata from processing each gene
+                        list. (default: False)
 
 
 lisa regions
@@ -130,13 +130,6 @@ positional arguments:
 
 optional arguments:
   -h, --help            show this help message and exit
-  --seed SEED           Random seed for gene selection. Allows for reproducing
-                        exact results. (default: 2556)
-  --use_motifs          Use motif hits instead of ChIP-seq peaks to represent
-                        TF binding (only recommended if TF-of-interest is not
-                        represented in ChIP-seq database). (default: chipseq)
-  --save_metadata       Save json-formatted metadata from processing each gene
-                        list. (default: False)
   -r REGIONS, --regions REGIONS
                         Bed file with columns: chr, start, end[, score]
                         (default: None)
@@ -161,4 +154,11 @@ optional arguments:
                         Number of sampled background genes to compare to user-
                         supplied genes (default: 3000)
   -v VERBOSE, --verbose VERBOSE
+  --seed SEED           Random seed for gene selection. Allows for reproducing
+                        exact results. (default: 2556)
+  --use_motifs          Use motif hits instead of ChIP-seq peaks to represent
+                        TF binding (only recommended if TF-of-interest is not
+                        represented in ChIP-seq database). (default: chipseq)
+  --save_metadata       Save json-formatted metadata from processing each gene
+                        list. (default: False)
 
