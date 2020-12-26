@@ -12,18 +12,22 @@ Which are used depending on the evidence you have on hand.
 
 See the `User Guide <docs/user_guide.rst>`_ for more usage information.
 See the `Python API <docs/python_api.rst>`_ for more in-depth description of tests and parameters.
+
+
 lisa oneshot
+
 ************
+
 You have: 
+
 * one genelist
 
 Use LISA to infer influential TFs from one gene list, with background epigenetic landscape modeled using public data. 
 If you have multiple lists, this option will be slower than using "multi" due to data-loading time. 
 
 *Example:*
-``
+
 $ lisa oneshot hg38 ./genelist.txt -b 501 -c 5 --seed=2556 --save_metadata > results.tsv
-``
 
 usage: make_docs.py oneshot [-h] [--seed SEED] [--use_motifs]
                             [--save_metadata] [-o OUTPUT_PREFIX]
@@ -179,18 +183,22 @@ optional arguments:
                         Number of sampled background genes to compare to user-
                         supplied genes (default: 3000)
   -v VERBOSE, --verbose VERBOSE
+
+
 lisa oneshot
+
 ************
+
 You have: 
+
 * one genelist
 
 Use LISA to infer influential TFs from one gene list, with background epigenetic landscape modeled using public data. 
 If you have multiple lists, this option will be slower than using "multi" due to data-loading time. 
 
 *Example:*
-``
+
 $ lisa oneshot hg38 ./genelist.txt -b 501 -c 5 --seed=2556 --save_metadata > results.tsv
-``
 
 usage: make_docs.py oneshot [-h] [--seed SEED] [--use_motifs]
                             [--save_metadata] [-o OUTPUT_PREFIX]
@@ -346,18 +354,22 @@ optional arguments:
                         Number of sampled background genes to compare to user-
                         supplied genes (default: 3000)
   -v VERBOSE, --verbose VERBOSE
+
+
 lisa oneshot
+
 ************
+
 You have: 
+
 * one genelist
 
 Use LISA to infer influential TFs from one gene list, with background epigenetic landscape modeled using public data. 
 If you have multiple lists, this option will be slower than using "multi" due to data-loading time. 
 
 *Example:*
-``
+
 $ lisa oneshot hg38 ./genelist.txt -b 501 -c 5 --seed=2556 --save_metadata > results.tsv
-``
 
 usage: make_docs.py oneshot [-h] [--seed SEED] [--use_motifs]
                             [--save_metadata] [-o OUTPUT_PREFIX]
