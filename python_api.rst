@@ -25,18 +25,19 @@ This model is useful for integrating accessibility and binding data when you hav
 genes-of-interest, as well as regions-of-interest, you may use the more specific test provided by ``lisa.FromRegions``.
 
 *Example:*
-``
-# Read genelist file
->>> genes_file = open('./genelist.txt', 'r')
->>> genes = [x.strip() for x in genes_file.readlines()]
->>> genes_file.close()
-# Instantiate lisa_regions object. You can pass your regions as a python list of lists, or as the filepath to a bedfile
->>> lisa_regions = lisa.FromGenes('hg38', cores = 10, isd_method = 'chipseq')
-# Run the LISA test on your genelist
->>> results, metadata = lisa_regions.predict(genes, num_background_genes = 501)
-# Print results to stdout
->>> print(results.to_tsv())
-``
+
+.. code:: bash
+
+    # Read genelist file
+    >>> genes_file = open('./genelist.txt', 'r')
+    >>> genes = [x.strip() for x in genes_file.readlines()]
+    >>> genes_file.close()
+    # Instantiate lisa_regions object. You can pass your regions as a python list of lists, or as the filepath to a bedfile
+    >>> lisa_regions = lisa.FromGenes('hg38', cores = 10, isd_method = 'chipseq')
+    # Run the LISA test on your genelist
+    >>> results, metadata = lisa_regions.predict(genes, num_background_genes = 501)
+    # Print results to stdout
+    >>> print(results.to_tsv())
 
 For more, see `user guide <docs/user_guide.rst>`_.
     
@@ -90,18 +91,19 @@ custom genes x regions matrix, where every region's influence is mapped to every
 This interface outputs results in the same format as the ``FromGenes`` interface.
 
 *Example:*
-``
-# Read genelist file
->>> genes_file = open('./genelist.txt', 'r')
->>> genes = [x.strip() for x in genes_file.readlines()]
->>> genes_file.close()
-# Instantiate lisa_regions object. You can pass your regions as a python list of lists, or as the filepath to a bedfile
->>> lisa_regions = lisa.FromRegions('hg38', './regions.bed', isd_method = 'chipseq')
-# Run the LISA test on your genelist
->>> results, metadata = lisa_regions.predict(genes, num_background_genes = 501)
-# Print results to stdout
->>> print(results.to_tsv())
-``
+
+.. code:: python
+    # Read genelist file
+    >>> genes_file = open('./genelist.txt', 'r')
+    >>> genes = [x.strip() for x in genes_file.readlines()]
+    >>> genes_file.close()
+    # Instantiate lisa_regions object. You can pass your regions as a python list of lists, or as the filepath to a bedfile
+    >>> lisa_regions = lisa.FromRegions('hg38', './regions.bed', isd_method = 'chipseq')
+    # Run the LISA test on your genelist
+    >>> results, metadata = lisa_regions.predict(genes, num_background_genes = 501)
+    # Print results to stdout
+    >>> print(results.to_tsv())
+
 For more, see `User Guide <docs/user_guide.rst>`_.
 
     

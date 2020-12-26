@@ -1,18 +1,17 @@
 
-*******************************************
-LISA: Landscape In-Silico deletion Analysis
-*******************************************
+********
+Lisa CLI
+********
 
-LISA is a statistical test that finds the most influential Transcription Factors related to a set of genes. We leverage integrative modeling of a comprehensive dataset 
-of 100s of chromatin accessiblity samples and 1000s of ChIP experiments to make predictions. Particularly, LISA models how much the *cis*-regulatory elements around 
-a gene are influenced by deleting elements associated with a TF (a process we call *insilico* deletion). For more information, see 
-`<https://genomebiology.biomedcentral.com/articles/10.1186/s13059-020-1934-6>`_.
+Installing LISA using pip or conda adds the "lisa" command to your path. LISA's functionality is divided into three main subcommands:
+* `lisa oneshot`_: one genelist
+* `lisa multi`_: multiple genelists
+* `lisa regions`_: one genelist and a list of regions
 
-Interfaces
-**********
-* `lisa.FromGenes`_
-* `lisa.FromRegions`_
+Which are used depending on the evidence you have on hand. 
 
+See the `User Guide <docs/user_guide.rst>`_ for more usage information.
+See the `Python API <docs/python_api.rst>`_ for more in-depth description of tests and parameters.
 usage: make_docs.py oneshot [-h] [--seed SEED] [--use_motifs]
                             [--save_metadata] [-o OUTPUT_PREFIX]
                             [--background_strategy {regulatory,random,provided}]
@@ -20,6 +19,13 @@ usage: make_docs.py oneshot [-h] [--seed SEED] [--use_motifs]
                             [-v VERBOSE] -c CORES
                             [-a {Direct,H3K27ac,DNase} [{Direct,H3K27ac,DNase} ...]]
                             {hg38,mm10} query_list
+
+lisa oneshot ************ You have: * one genelist Use LISA to infer
+influential TFs from one gene list, with background epigenetic landscape
+modeled using public data. If you have multiple lists, this option will be
+slower than using "multi" due to data-loading time. *Example:* `` $ lisa
+oneshot hg38 ./genelist.txt -b 501 -c 5 --seed=2556 --save_metadata >
+results.tsv ``
 
 positional arguments:
   {hg38,mm10}           Find TFs associated with human (hg38) or mouse (mm10)
@@ -63,6 +69,13 @@ usage: make_docs.py multi [-h] [--seed SEED] [--use_motifs] [--save_metadata]
                           [-a {Direct,H3K27ac,DNase} [{Direct,H3K27ac,DNase} ...]]
                           {hg38,mm10} query_lists [query_lists ...]
 
+lisa multi ********** You have: * multiple genelists Use LISA to infer
+influential TFs from multiple lists. This function processes each genelist
+independently in the same manner as the "oneshot" command, but reduces data
+loading time. Useful when performing the test on up and down-regulated genes
+from multiple RNA-seq clusters. *Example:* `` $ lisa multi hg38
+./genelists/*.txt -b 501 -c 5 -o ./results/ ``
+
 positional arguments:
   {hg38,mm10}           Find TFs associated with human (hg38) or mouse (mm10)
                         genes
@@ -98,6 +111,19 @@ usage: make_docs.py regions [-h] [--seed SEED] [--use_motifs]
                             [--background_list BACKGROUND_LIST | -b NUM_BACKGROUND_GENES]
                             [-v VERBOSE]
                             {hg38,mm10}
+
+lisa regions ************ You have: * one genelist * regions (250 - 1000 bp
+wide) of interest related to that list * optional: a positive score/weight
+associated with each region (you may pass zero-weight regions, but they do not
+affect the test and will be filtered out) Use LISA to infer TF influence on
+your geneset, but provide your regions-of-interest rather than building a
+background epigenetic model using public data. When providing your own
+regions, LISA uses higher resolution, more precise binding data to increase
+the power of the test. Your regions should be between ~250 and 1000 bp in
+width, and the associated score should be positive. Scores are often read-
+depth at those regions, but can be any metic you think may influence gene
+regulation. *Example:* `` $ lisa regions -r ./regions.bed -q ./genelist.txt -b
+501 --save_metadata > results.tsv ``
 
 positional arguments:
   {hg38,mm10}           Find TFs associated with human (hg38) or mouse (mm10)
