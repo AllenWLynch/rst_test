@@ -40,40 +40,27 @@ usage:
                             {hg38,mm10} query_list
 
 positional arguments:
-  {hg38,mm10}           Find TFs associated with human (hg38) or mouse (mm10)
-                        genes
-  query_list            user-supplied gene lists. One gene per line in either
-                        symbol or refseqID format
+  {hg38,mm10}           Find TFs associated with human (hg38) or mouse (mm10) genes
+  query_list            user-supplied gene lists. One gene per line in either symbol or refseqID format
 
 optional arguments:
   -h, --help            show this help message and exit
   -o OUTPUT_PREFIX, --output_prefix OUTPUT_PREFIX
-                        Output file prefix. If left empty, will write results
-                        to stdout. (default: None)
+                        Output file prefix. If left empty, will write results to stdout. (default: None)
   --background_strategy {regulatory,random,provided}
-                        Background genes selection strategy. LISA samples
-                        background genes to compare to user's genes-of-
-                        interest from a diverse regulatory background
-                        (regulatory - recommended), randomly from all genes
-                        (random), or uses a user-provided list (provided).
-                        (default: regulatory)
+                        Background genes selection strategy. LISA samples background genes to compare to user's genes-of-interest from a diverse
+                                regulatory background (regulatory - recommended), randomly from all genes (random), or uses a user-provided list (provided).
+                                 (default: regulatory)
   --background_list BACKGROUND_LIST
-                        user-supplied list of backgroung genes. Used when
-                        --background_strategy flag is set to "provided"
-                        (default: None)
+                        user-supplied list of backgroung genes. Used when --background_strategy flag is set to "provided" (default: None)
   -b NUM_BACKGROUND_GENES, --num_background_genes NUM_BACKGROUND_GENES
-                        Number of sampled background genes to compare to user-
-                        supplied genes (default: 3000)
+                        Number of sampled background genes to compare to user-supplied genes (default: 3000)
   -v VERBOSE, --verbose VERBOSE
   -c CORES, --cores CORES
   -a {Direct,H3K27ac,DNase} [{Direct,H3K27ac,DNase} ...], --assays {Direct,H3K27ac,DNase} [{Direct,H3K27ac,DNase} ...]
-  --seed SEED           Random seed for gene selection. Allows for reproducing
-                        exact results. (default: 2556)
-  --use_motifs          Use motif hits instead of ChIP-seq peaks to represent
-                        TF binding (only recommended if TF-of-interest is not
-                        represented in ChIP-seq database). (default: chipseq)
-  --save_metadata       Save json-formatted metadata from processing each gene
-                        list. (default: False)
+  --seed SEED           Random seed for gene selection. Allows for reproducing exact results. (default: 2556)
+  --use_motifs          Use motif hits instead of ChIP-seq peaks to represent TF binding (only recommended if TF-of-interest is not represented in ChIP-seq database). (default: chipseq)
+  --save_metadata       Save json-formatted metadata from processing each gene list. (default: False)
 
 
 lisa multi
@@ -100,10 +87,8 @@ usage:
                           {hg38,mm10} query_lists [query_lists ...]
 
 positional arguments:
-  {hg38,mm10}           Find TFs associated with human (hg38) or mouse (mm10)
-                        genes
-  query_lists           user-supplied gene lists. One gene per line in either
-                        symbol or refseqID format
+  {hg38,mm10}           Find TFs associated with human (hg38) or mouse (mm10) genes
+  query_lists           user-supplied gene lists. One gene per line in either symbol or refseqID format
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -111,20 +96,13 @@ optional arguments:
                         Output file prefix. (default: None)
   -v VERBOSE, --verbose VERBOSE
   -b NUM_BACKGROUND_GENES, --num_background_genes NUM_BACKGROUND_GENES
-                        Number of sampled background genes to compare to user-
-                        supplied genes. These genes are selection from other
-                        gene lists. (default: 3000)
-  --random_background   Use random background selection rather than
-                        "regulatory" selection. (default: regulatory)
+                        Number of sampled background genes to compare to user-supplied genes. These genes are selection from other gene lists. (default: 3000)
+  --random_background   Use random background selection rather than "regulatory" selection. (default: regulatory)
   -c CORES, --cores CORES
   -a {Direct,H3K27ac,DNase} [{Direct,H3K27ac,DNase} ...], --assays {Direct,H3K27ac,DNase} [{Direct,H3K27ac,DNase} ...]
-  --seed SEED           Random seed for gene selection. Allows for reproducing
-                        exact results. (default: 2556)
-  --use_motifs          Use motif hits instead of ChIP-seq peaks to represent
-                        TF binding (only recommended if TF-of-interest is not
-                        represented in ChIP-seq database). (default: chipseq)
-  --save_metadata       Save json-formatted metadata from processing each gene
-                        list. (default: False)
+  --seed SEED           Random seed for gene selection. Allows for reproducing exact results. (default: 2556)
+  --use_motifs          Use motif hits instead of ChIP-seq peaks to represent TF binding (only recommended if TF-of-interest is not represented in ChIP-seq database). (default: chipseq)
+  --save_metadata       Save json-formatted metadata from processing each gene list. (default: False)
 
 
 lisa regions
@@ -156,40 +134,26 @@ usage:
                             {hg38,mm10}
 
 positional arguments:
-  {hg38,mm10}           Find TFs associated with human (hg38) or mouse (mm10)
-                        genes
+  {hg38,mm10}           Find TFs associated with human (hg38) or mouse (mm10) genes
 
 optional arguments:
   -h, --help            show this help message and exit
   -r REGIONS, --regions REGIONS
-                        Bed file with columns: chr, start, end[, score]
-                        (default: None)
+                        Bed file with columns: chr, start, end[, score] (default: None)
   -q--query_list Q__QUERY_LIST
-                        user-supplied gene list. One gene per line in either
-                        symbol or refseqID format (default: None)
+                        user-supplied gene list. One gene per line in either symbol or refseqID format (default: None)
   -o OUTPUT_PREFIX, --output_prefix OUTPUT_PREFIX
-                        Output file prefix. If left empty, will write results
-                        to stdout. (default: None)
+                        Output file prefix. If left empty, will write results to stdout. (default: None)
   --background_strategy {regulatory,random,provided}
-                        Background genes selection strategy. LISA samples
-                        background genes to compare to user's genes-of-
-                        interest from a diverse regulatory background
-                        (regulatory - recommended), randomly from all genes
-                        (random), or uses a user-provided list (provided).
-                        (default: regulatory)
+                        Background genes selection strategy. LISA samples background genes to compare to user's genes-of-interest from a diverse
+                                regulatory background (regulatory - recommended), randomly from all genes (random), or uses a user-provided list (provided).
+                                 (default: regulatory)
   --background_list BACKGROUND_LIST
-                        user-supplied list of backgroung genes. Used when
-                        --background_strategy flag is set to "provided"
-                        (default: None)
+                        user-supplied list of backgroung genes. Used when --background_strategy flag is set to "provided" (default: None)
   -b NUM_BACKGROUND_GENES, --num_background_genes NUM_BACKGROUND_GENES
-                        Number of sampled background genes to compare to user-
-                        supplied genes (default: 3000)
+                        Number of sampled background genes to compare to user-supplied genes (default: 3000)
   -v VERBOSE, --verbose VERBOSE
-  --seed SEED           Random seed for gene selection. Allows for reproducing
-                        exact results. (default: 2556)
-  --use_motifs          Use motif hits instead of ChIP-seq peaks to represent
-                        TF binding (only recommended if TF-of-interest is not
-                        represented in ChIP-seq database). (default: chipseq)
-  --save_metadata       Save json-formatted metadata from processing each gene
-                        list. (default: False)
+  --seed SEED           Random seed for gene selection. Allows for reproducing exact results. (default: 2556)
+  --use_motifs          Use motif hits instead of ChIP-seq peaks to represent TF binding (only recommended if TF-of-interest is not represented in ChIP-seq database). (default: chipseq)
+  --save_metadata       Save json-formatted metadata from processing each gene list. (default: False)
 
