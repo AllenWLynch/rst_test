@@ -28,14 +28,6 @@ If you have multiple lists, this option will be slower than using "multi" due to
 
 $ lisa oneshot hg38 ./genelist.txt -b 501 -c 5 --seed=2556 --save_metadata > results.tsv
 
-usage: lisa oneshot [-h] [--seed SEED] [--use_motifs]
-                            [--save_metadata] [-o OUTPUT_PREFIX]
-                            [--background_strategy {regulatory,random,provided}]
-                            [--background_list BACKGROUND_LIST | -b NUM_BACKGROUND_GENES]
-                            [-v VERBOSE] -c CORES
-                            [-a {Direct,H3K27ac,DNase} [{Direct,H3K27ac,DNase} ...]]
-                            {hg38,mm10} query_list
-
 positional arguments:
   {hg38,mm10}           Find TFs associated with human (hg38) or mouse (mm10)
                         genes
@@ -87,13 +79,6 @@ the test on up and down-regulated genes from multiple RNA-seq clusters.
 
 $ lisa multi hg38 ./genelists/*.txt -b 501 -c 5 -o ./results/
 
-usage: lisa multi [-h] [--seed SEED] [--use_motifs] [--save_metadata]
-                          -o OUTPUT_PREFIX [-v VERBOSE]
-                          [-b NUM_BACKGROUND_GENES] [--random_background] -c
-                          CORES
-                          [-a {Direct,H3K27ac,DNase} [{Direct,H3K27ac,DNase} ...]]
-                          {hg38,mm10} query_lists [query_lists ...]
-
 positional arguments:
   {hg38,mm10}           Find TFs associated with human (hg38) or mouse (mm10)
                         genes
@@ -138,14 +123,6 @@ associated score should be positive. Scores are often read-depth at those region
 *Example:*
 
 $ lisa regions -r ./regions.bed -q ./genelist.txt -b 501 --save_metadata > results.tsv
-
-usage: lisa regions [-h] [--seed SEED] [--use_motifs]
-                            [--save_metadata] [-r REGIONS]
-                            [-q--query_list Q__QUERY_LIST] [-o OUTPUT_PREFIX]
-                            [--background_strategy {regulatory,random,provided}]
-                            [--background_list BACKGROUND_LIST | -b NUM_BACKGROUND_GENES]
-                            [-v VERBOSE]
-                            {hg38,mm10}
 
 positional arguments:
   {hg38,mm10}           Find TFs associated with human (hg38) or mouse (mm10)
