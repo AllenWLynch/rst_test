@@ -9,8 +9,10 @@ a gene are influenced by deleting elements associated with a TF (a process we ca
 `<https://genomebiology.biomedcentral.com/articles/10.1186/s13059-020-1934-6>`_.
 
 Interfaces
-* `lisa.Genes`_
+**********
+* `lisa.FromGenes`_
 * `lisa.FromRegions`_
+
 
 lisa.FromGenes
 **************
