@@ -8,10 +8,7 @@ of 100s of chromatin accessiblity samples and 1000s of ChIP experiments to make 
 a gene are influenced by deleting elements associated with a TF (a process we call *insilico* deletion). For more information, see 
 `<https://genomebiology.biomedcentral.com/articles/10.1186/s13059-020-1934-6>`_.
 
-Interfaces
-**********
-* `lisa.FromGenes`_
-* `lisa.FromRegions`_
+.. contents:: Interfaces
 
 
 lisa.FromGenes
@@ -24,9 +21,7 @@ on your genes-of-interest vs a sampling of background genes through through thos
 This model is useful for integrating accessibility and binding data when you have strictly a list of associated genes (from scRNA-seq, for example). If you have 
 genes-of-interest, as well as regions-of-interest, you may use the more specific test provided by ``lisa.FromRegions``.
 
-*Example:*
-
-.. code:: bash
+Example ::
 
     # Read genelist file
     >>> genes_file = open('./genelist.txt', 'r')
@@ -38,37 +33,56 @@ genes-of-interest, as well as regions-of-interest, you may use the more specific
     >>> results, metadata = lisa_regions.predict(genes, num_background_genes = 501)
     # Print results to stdout
     >>> print(results.to_tsv())
+    # Get results as pandas DataFrame
+    >>> results_df = pd.DataFrame(results.to_dict())
 
-For more, see `user guide <docs/user_guide.rst>`_.
+**For more, see `user guide <docs/user_guide.rst>`_.**
+
     
 
-**lisa.FromGenes(self, species, cores = 1, assays = ['Direct','H3K27ac','DNase'], isd_method = 'chipseq')**
+    **lisa.FromGenes(species, rp_map = 'basic_10K', assays = ['Direct','H3K27ac','DNase'], isd_method = 'chipseq', verbose = True, log = None)**
     Initialize the LISA test using public data.
 
-    :params:
-    * **species:** {'hg38', 'mm10'}
-    * **cores:** *int* number of cores to use. For optimal performance, allocate 1, 2, 5, or 10 cores. More cores is faster.
-    * **assays:** *list* of {"Direct","H3K27ac","DNase"}, default is all tests
-    * **isd_method:** {"chipseq", "motifs"} use ChIP-seq data or motifs to mark TF binding locations.
+    Params
+    ------
+    species : {'hg38', 'mm10'}
+    assays : list of {"Direct","H3K27ac","DNase"}
+        default is all tests
+    isd_method : {"chipseq", "motifs"}
+        Use ChIP-seq data or motifs to mark TF binding locations.
+    rp_map : {"basic_10K", "enhanced_10K"}
+        Choice of RP map, which maps the regulatory influence of a region to a gene. The "basic_10K" model is based simply off distance, with the "enhanced_10K" model masks out the promoter and exon regions of other nearby genes.
+    verbose: int
+        Number of levels of log messages to print to stderr
     
-    :returns:
-    * **lisa object**
+    Returns
+    -------
+    lisa.lisa_public_data.lisa object
         
 
-    **.predict(self, query_list, background_list = [], background_strategy = 'regulatory', num_background_genes = 3000, seed = 2556)**
+        **predict(self, query_list, background_list = [], background_strategy = 'regulatory', num_background_genes = 3000, seed = 2556)**
         Predict TF influence given a set of genes.
+        
+        Params
+        ------
+        query_list : list
+            Genes-of-interest, in either Symbol of RefSeqID format. Must provide between 20 to 500 genes.
+        background_list : list
+            User-specified list of background genes to compare with query_list. Must contain more genes than query list and entire list will be used. If provided, ```background_strategy``` must be set to "provided".
+        background_strategy : {"regulatory","random","provided"}
+            Regulatory will sample background genes from a stratified sample of TADs and regulatory states, random will randomly sample from all non-query genes.
+        num_background_genes : int
+            Number of genes to use as comparison to query genes. More background genes make test slower, but more stable.
+        seed : int
+            Seed for gene selection and regression model initialization.
 
-        :params:
-        * **query_list:** *list* genes-of-interest, in either Symbol of RefSeqID format. Must provide between 20 to 500 genes.
-        * **background_list:** *list* user-specified list of background genes to compare with query_list. Must contain more genes than query list and entire list will be used. If provided, ```background_strategy``` must be set to "provided".
-        * **background_strategy:** {"regulatory","random","provided"}, regulatory will sample background genes from a stratified sample of TADs and regulatory states, random will randomly sample from all non-query genes.
-        * **num_background_genes:** *int* Number of genes to use as comparison to query genes. More background genes make test slower, but more stable.
-        * **seed:** *int* Seed for gene selection and regression model initialization.
-
-        :returns:
-        * **results:** Dictionary with each key representing a table column, sorted by "summary_p_value" field. The dictionary can be passed directly to a the pandas constructor: ``results_df = pd.DataFrame(results.todict())``.
-        * **metadata:** Dictionary with test metadata. Includes query genes provided and background genes that were selected. This 
-        metadata dict also contains information on the accessibility datasets that were selected to represent the chromatin landscape around you genes-of-interest, for example, the tissue and cell line from which the profiles were derived.
+        Returns
+        -------
+        results
+            lisa.core.utils.LISA_Results object with each key representing a table column, sorted by "summary_p_value" field. The dictionary can be passed directly to a the pandas constructor: ``results_df = pd.DataFrame(results.todict())``.
+        metadata
+            Dictionary with test metadata. Includes query genes provided and background genes that were selected. This metadata dict also contains information on the accessibility datasets that were selected to represent the chromatin landscape around you genes-of-interest, for example, the tissue and cell line from which the profiles were derived.
+        
         
 
 
@@ -90,9 +104,7 @@ custom genes x regions matrix, where every region's influence is mapped to every
 
 This interface outputs results in the same format as the ``FromGenes`` interface.
 
-*Example:*
-
-.. code:: python
+Example ::
 
     # Read genelist file
     >>> genes_file = open('./genelist.txt', 'r')
@@ -104,38 +116,94 @@ This interface outputs results in the same format as the ``FromGenes`` interface
     >>> results, metadata = lisa_regions.predict(genes, num_background_genes = 501)
     # Print results to stdout
     >>> print(results.to_tsv())
+    # Get results as pandas DataFrame
+    >>> results_df = pd.DataFrame(results.to_dict())
 
-For more, see `User Guide <docs/user_guide.rst>`_.
-
+**For more, see `User Guide <docs/user_guide.rst>`_.**
     
 
-**lisa.FromRegions(self, species, regions, region_scores = None, rp_map = 'basic', rp_decay = 10000, isd_method = 'chipseq')**
+    **lisa.FromRegions(species, regions, rp_map = 'basic', rp_decay = 10000, isd_method = 'chipseq', verbose = 4, log = None)**
     Initialize the LISA test using user-defined regions.
 
-    :params:
-    * **species:** {'hg38', 'mm10'} 
-    * **regions:** list orf lists/tuples with format [('chr', start, end[, score]), ... ], specifying user-defined regions. The score column is optional and if not provided, all 
-        regions will be given same weight. This parameter may also be the filename of a bed file with the same format.
-    * **region_scores:** *list or np.ndarray of shape (len(regions), )* (optional) Region scores/weights. Must be same length as regions. User may not provide regions with a score column and this parameter at the same time.
-    * **rp_map:** *str, list, scipy.sparse_matrix, np.ndarray* RP map type, currently only supports "basic". User may also pass their own RP map of scipy.sparse_matrix or np.ndarry type in the shape (genes x regions)
-    * **rp_decay:** *float, int* Decay rate of region influence on gene based on distance from TSS. Increase to prioritize distal regions, decrease to prioritize promoters. Default of 10000 bp is balanced.
-    * **isd_method:** {"chipseq", "motifs"} use ChIP-seq data or motifs to mark TF binding locations.
+    Params
+    ------
+    species : {'hg38', 'mm10'} 
+    regions : list of lists/tuples with format [('chr', start, end), ... ]
+        User-defined regions. 
+    rp_map : {"basic", "enhanced"}, scipy.sparse_matrix
+        RP map type, currently supports "basic" and "enhanced". User may also pass their own RP map as scipy.sparse_matrix in the shape (genes x regions)
+    rp_decay : float, int 
+        Decay rate of region influence on gene based on distance from TSS. Increase to prioritize distal regions, decrease to prioritize promoters. Default of 10000 bp is balanced.
+    isd_method : {"chipseq", "motifs"} 
+        Use ChIP-seq data or motifs to mark TF binding locations.
+    verbose: int
+        Number of levels of log messages to print to stderr
     
-    :returns:
-    * **lisa object**
+    Returns
+    -------
+    lisa.lisa_user_data.lisa.LISA object
         
 
-    **.predict(self, query_list, background_list = [], background_strategy = 'regulatory', num_background_genes = 3000, seed = 2556)**
+    **lisa.FromRegions.using_bedfile(cls, species, path, query_genes, rp_map = 'basic', rp_decay = 10000, isd_method = 'chipseq', background_list = [], background_strategy = 'regulatory', num_background_genes = 3000, seed = 2556, header = False, verbose = 4, log = None)**
+    Run LISA FromRegions test using a bedfile.
+
+    Params
+    ------
+    species : {'hg38', 'mm10'}
+    path : str
+        Path to tab-delineated bedfile with columns: chr start end [score]
+        The score column is optional.
+    query_genes : list
+        Genes-of-interest, in either Symbol of RefSeqID format. Must provide between 20 to 500 genes.
+    rp_map : {"basic", "enhanced"}, scipy.sparse_matrix
+        RP map type, currently supports "basic" and "enhanced". User may also pass their own RP map as scipy.sparse_matrix in the shape (genes x regions)
+    rp_decay : float, int
+        Decay rate of region influence on gene based on distance from TSS. Increase to prioritize distal regions, decrease to prioritize promoters. Default of 10000 bp is balanced.
+    isd_method : {"chipseq", "motifs"} 
+        Use ChIP-seq data or motifs to mark TF binding locations.
+    background_list : list
+        User-specified list of background genes to compare with query_list. Must contain more genes than query list and entire list will be used. If provided, "background_strategy" must be set to "provided".
+    background_strategy : {"regulatory","random","provided"}
+        Regulatory will sample background genes from a stratified sample of TADs and regulatory states, random will randomly sample from all non-query genes.
+    num_background_genes : int
+        Number of genes to use as comparison to query genes. More background genes make test slower, but more stable.
+    seed : int
+        Seed for gene selection and regression model initialization.
+    header : bool
+        Skip first line of bedfile
+    verbose: int
+        Number of levels of log messages to print to stderr
+
+    Returns
+    -------
+    results
+        lisa.core.utils.LISA_Results with each key representing a table column, sorted by "summary_p_value" field. The dictionary can be passed directly to a the pandas constructor: ``results_df = pd.DataFrame(results.to_dict())``.
+    metadata 
+        Dictionary with test metadata. Includes query genes provided and background genes that were selected.
+        
+
+        **predict(query_genes, region_scores = None, background_list = [], background_strategy = 'regulatory', num_background_genes = 3000, seed = 2556)**
         Predict TF influence given a set of genes.
         
-        :params:
-        * **query_list:** *list* genes-of-interest, in either Symbol of RefSeqID format. Must provide between 20 to 500 genes.
-        * **background_list:** *list* user-specified list of background genes to compare with query_list. Must contain more genes than query list and entire list will be used. If provided, ```background_strategy``` must be set to "provided".
-        * **background_strategy:** {"regulatory","random","provided"}, regulatory will sample background genes from a stratified sample of TADs and regulatory states, random will randomly sample from all non-query genes.
-        * **num_background_genes:** *int* Number of genes to use as comparison to query genes. More background genes make test slower, but more stable.
-        * **seed:** *int* Seed for gene selection and regression model initialization.
+        Params
+        ------
+        query_genes : list
+            Genes-of-interest, in either Symbol of RefSeqID format. Must provide between 20 to 500 genes.
+        region_scores : list or np.ndarray of shape (len(regions), )
+            Region scores/weights. Must be same length as regions. If not passed, all regions will be given score of 1.
+        background_list : list
+            User-specified list of background genes to compare with query_list. Must contain more genes than query list and entire list will be used. If provided, ```background_strategy``` must be set to "provided".
+        background_strategy : {"regulatory","random","provided"}
+            Regulatory will sample background genes from a stratified sample of TADs and regulatory states, random will randomly sample from all non-query genes.
+        num_background_genes : int
+            Number of genes to use as comparison to query genes. More background genes make test slower, but more stable.
+        seed : int
+            Seed for gene selection and regression model initialization.
 
-        :returns:
-        * **results:** Dictionary with each key representing a table column, sorted by "summary_p_value" field. The dictionary can be passed directly to a the pandas constructor: ``results_df = pd.DataFrame(results.todict())``.
-        * **metadata:** Dictionary with test metadata. Includes query genes provided and background genes that were selected.
+        Returns
+        -------
+        results
+            lisa.core.utils.LISA_Results with each key representing a table column, sorted by "summary_p_value" field. The results can be passed directly to a the pandas constructor by calling the "to_dict()" command: ``results_df = pd.DataFrame(results.to_dict())``.
+        metadata 
+            Dictionary with test metadata. Includes query genes provided and background genes that were selected.
         
