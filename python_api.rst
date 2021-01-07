@@ -19,7 +19,7 @@ on your genes-of-interest vs a sampling of background genes through through thos
 This model is useful for integrating accessibility and binding data when you have strictly a list of associated genes (from scRNA-seq, for example). If you have 
 genes-of-interest, as well as regions-of-interest, you may use the more specific test provided by ``lisa.FromRegions``.
 
-Example ::
+Example
 
     # Read genelist file
     >>> genes_file = open('./genelist.txt', 'r')
@@ -102,7 +102,7 @@ custom genes x regions matrix, where every region's influence is mapped to every
 
 This interface outputs results in the same format as the ``FromGenes`` interface.
 
-Example ::
+Example
 
     # Read genelist file
     >>> genes_file = open('./genelist.txt', 'r')
